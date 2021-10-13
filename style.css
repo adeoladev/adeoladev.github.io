@@ -29,7 +29,6 @@ body {
     margin-bottom: 20px;
     display: flex;
     flex-direction: column;
-    height: 220px;
 }
 
 #sidebar p {
@@ -64,11 +63,13 @@ p {
 .smallbox {
     margin-right:10px;
     width:200px;
+    height:130px;
     background-color:white;
     border-radius: 4px;
     position: relative;
     padding:10px;
     box-shadow: 0 0 4px rgb(0 0 0 / 30%);
+    margin-bottom:10px;
 }
 
 .boxtitle {
@@ -87,6 +88,7 @@ p {
 .smallboxes {
     display:flex;
     height: inherit;
+    flex-wrap:wrap;
 }
 
 .langs {
