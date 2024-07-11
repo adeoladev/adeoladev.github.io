@@ -157,7 +157,7 @@ a:hover {
     background-color:#FF7821;
 }
 .javascript {
-    background-color:#FFC107;
+    background-color:#3F51B5;
 }
 .php {
     background-color:#673AB7;
@@ -169,7 +169,7 @@ a:hover {
     background-color:#F44336;
 }
 .csharp {
-    background-color:#3F51B5;
+    background-color:#009688;
 }
 .laravel {
     background-color:#673AB7;
@@ -183,10 +183,18 @@ a:hover {
     width:80%;
 }
 
+#langbox {
+    width:82%;
+}
+
 @media (max-width: 780px) {
 
     #infobox {
         width:100%;
+    }
+    #langbox {
+        width:100%;
+        margin-left:-9px;
     }
 body {
     justify-content: flex-start;
