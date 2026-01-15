@@ -5,44 +5,67 @@
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 <link type="text/css" rel="stylesheet" href="style.css"/>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=0.6, user-scalable=no">
 </head>
 
 
 
-
 <body>
 
+  
 <div id='mainarea'>
-
+<div id="modalBg" v-if="viewingLarge">
+<div id="imageContainer" style="max-width:500px;color:white;position:inherit;max-height: 650px;">
+<p id="caption">{{ caption }}</p><i id="close" class="fa fa-times" aria-hidden="true" v-on:click="close"></i>
+<img :src="imageUrl" style="width:100%;max-height: 593px;">
+<video v-if="viewingVideo" :src="videoUrl" controls style="width:100%;"></video>
+</div>
+</div>      
+   
+<div id="mainarea2">
 <div id='sidebar'>
+        
 <div id="sideContent">
+<div style="display:flex;flex-direction: column;align-items: center">
 <div id='profile'></div>
 <h3 style='margin:0;font-size:20px;'>Adeola Boye</h3>
-<p style='margin:0;text-align: center;'>Full Stack Web Developer</p>
+<div id="switches">
+<div class="switch" title="Web Development" v-bind:class="{ 'selectedSwitch': webDev }" v-on:click="switchProfession('webdev')">
+<p><i class="fa fa-code" aria-hidden="true"></i></p>
+</div>
+<div class="switch" title="Graphic Design" v-bind:class="{ 'selectedSwitch': graphicDesign }" v-on:click="switchProfession('graphicdesign')">
+<p><i class="fas fa-images"></i></p>
+</div>
+</div>
+</div>
 <br>
 <div id='infobox'>
 <p style='text-align:left'><i class="fas fa-baby-carriage"></i> 1995</p>
 <p style='text-align:left'><i class="fas fa-compass"></i> Chelmsford, Essex</p>
 <p style='text-align:left'><i class="fas fa-envelope"></i> adeoladev@hotmail.com</p>
 </div>
-<div id='langbox' class="langs">
+<div class="langs" v-if="webDev">
     <p class='html'>HTML</p><p class='css'>CSS</p><p class='css'>Bootstrap</p><p class='javascript'>JavaScript</p>
     <p class='javascript'>Vue</p><p class='javascript'>Angular</p><p class='javascript'>NodeJS</p>
     <p class='php'>PHP</p><p class='laravel'>Laravel</p><p class='sql'>MySQL</p>
     <p class='csharp'>C# (ASP.Net)</p><p class='java'>Java</p>
+</div>
+<div class="langs" v-if="graphicDesign">
+    <p class='html'>Photoshop</p><p class='css'>Illustrator</p><p class='php'>Vegas Pro</p>
+    <p class='sql'>PowerPoint</p>
 </div>
 </div>
 </div>
 
 
 <div id='mainsection'>
-
-<div class='box'>
+<!--------------WEB DEV PROJECTS---------------->
+<div class='box' v-if="webDev">
 <h3 style='color:#F44336'>Projects</h3>
 <div class='smallboxes'>
 
-        <div class='toprow smallbox'>
+        <div class='toprow whitebox smallbox'>
                 <p class='boxtitle'>YouTube Link-Player</p>
                 <p class='boxdesc'>A browser extension that converts YouTube hyperlinks into embedded videos (2024).</p>
                 <div class='langs'>
@@ -51,7 +74,7 @@
                 <div class='bottom'><a href='https://github.com/adeoladev/youtube-linkplayer' target='_blank'>VIEW</a></div>
                 </div>
 
-<div class='toprow smallbox'>
+<div class='toprow whitebox smallbox'>
     <p class='boxtitle'>TopWaller</p>
     <p class='boxdesc'>A desktop application that makes it easier to download, collect and manage wallpapers (2024).</p>
     <div class='langs'>
@@ -61,7 +84,7 @@
     </div>
 
  
-<div class='toprow smallbox'>
+<div class='toprow whitebox smallbox'>
     <p class='boxtitle'>EasyDate</p>
     <p class='boxdesc'>A library that converts sentences into date formats (2021 - 2024).</p>
     <div class='langs'>
@@ -71,9 +94,9 @@
     </div>
 
 
-<div class='toprow smallbox'>
+<div class='toprow whitebox smallbox'>
     <p class='boxtitle'>Rateflix</p>
-    <p class='boxdesc'>A single-page application for viewing movie ratings (2021).</p>
+    <p class='boxdesc'>A single-page application for movie ratings (2021 - 2025).</p>
     <div class='langs'>
     <p class='javascript'>Vue</p><p class='css'>Bootstrap</p><p class='php'>PHP</p>
     </div>
@@ -81,7 +104,7 @@
     </div>  
 
    
-<div class='toprow smallbox'>
+<div class='toprow whitebox smallbox'>
     <p class='boxtitle'>Laraboard</p>
     <p class='boxdesc'>A Laravel-based imageboard engine (2020 - 2023).</p>
     <div class='langs'>
@@ -90,7 +113,7 @@
     <div class='bottom'><a href='https://github.com/adeoladev/laraboard' target='_blank'>VIEW</a></div>
     </div>
     
-<div class='toprow smallbox'>
+<div class='toprow whitebox smallbox'>
     <p class='boxtitle'>UniDb</p>
     <p class='boxdesc'>An API that aggregates UK university data (2020 - 2023).</p>
     <div class='langs'>
@@ -100,7 +123,7 @@
     </div>
         
 
-<div class='toprow smallbox'>
+<div class='toprow whitebox smallbox'>
     <p class='boxtitle'>GamerGoal</p>
     <p class='boxdesc'>A social network for gaming enthusiasts (2018 - 2020).</p>
     <div class='langs'>
@@ -112,11 +135,149 @@
         
 </div>
 </div>
+<!-------------GRAPHIC DESIGN PROJECTS---------------->
+
+<div class='box' v-if="graphicDesign">
+        <h3 style='color:#F44336'>Projects & Commissions</h3>
+
+        <div class='smallboxes'>
+   
+        <div class='toprow whitebox bigbox'>
+            <p class='boxtitle'>Info Graphics</p>
+            <div class="icons">
+            <div class="icon" style="background-image:url('pics/infographics/advertising.jpg');background-size: 150%" v-on:click="viewInfoGraphic(1)">   
+            </div>
+            <div class="icon" style="background-image:url('pics/infographics/copyright.jpg')" v-on:click="viewInfoGraphic(2)">   
+            </div>
+            <div class="icon" style="background-image:url('pics/infographics/london.jpg')" v-on:click="viewInfoGraphic(3)">   
+            </div>
+            <div class="icon" style="background-image:url('pics/infographics/taxes.png');background-size: 150%" v-on:click="viewInfoGraphic(4)">   
+            </div>
+            </div>
+        </div>
+        
+        <div class='toprow whitebox bigbox'>
+            <p class='boxtitle'>Logos</p>
+            <div class="icons">
+            <div class="icon" style="background-image:url('pics/logos/dog.jpg')" v-on:click="viewLogo(2)">   
+            </div>
+            <div class="icon" style="background-image:url('pics/logos/kingky.png')" v-on:click="viewLogo(3)">   
+            </div>
+            <div class="icon" style="background-image:url('pics/logos/thinkmedia1.png')" v-on:click="viewLogo(4)">   
+            </div>
+            <div class="icon" style="background-image:url('pics/logos/unknown.jpg')" v-on:click="viewLogo(5)">   
+            </div>
+            <div class="icon" style="background-image:url('pics/logos/church.jpg')" v-on:click="viewLogo(1)">   
+            </div>
+            </div>
+        </div>
+
+        <div class='toprow whitebox bigbox'>
+            <p class='boxtitle'>Print Design</p>
+            <div class="icons">
+            <div class="icon" style="background-image:url('pics/print/mintel.jpg')" v-on:click="viewPrintDesign(1)">   
+            </div>
+            <div class="icon" style="background-image:url('pics/print/sanatore.png');background-size: 250%" v-on:click="viewPrintDesign(2)">   
+            </div>
+            <div class="icon" style="background-image:url('pics/print/sf2.jpg')" v-on:click="viewPrintDesign(3)">   
+            </div>
+            <div class="icon" style="background-image:url('pics/print/manucore.jpg')" v-on:click="viewPrintDesign(4)">   
+            </div>
+            <div class="icon" style="background-image:url('pics/print/smartcities.jpg')" v-on:click="viewPrintDesign(5)">   
+            </div>
+            <div class="icon" style="background-image:url('pics/print/Android.png')" v-on:click="viewPrintDesign(6)">   
+            </div>
+            <div class="icon" style="background-image:url('pics/print/attendance.jpg')" v-on:click="viewPrintDesign(7)">   
+            </div>
+            
+            </div>
+        </div>
+            
+        <div class='toprow whitebox bigbox'>
+            <p class='boxtitle'>Typographic Posters</p>
+            <div class="icons">
+            <div class="icon" style="background-image:url('pics/typography/creative.jpg')" v-on:click="viewTypoPoster(1)">   
+            </div>
+            <div class="icon" style="background-image:url('pics/typography/robert.jpg')" v-on:click="viewTypoPoster(2)">   
+            </div>
+            <div class="icon" style="background-image:url('pics/typography/sins.png')" v-on:click="viewTypoPoster(3)">   
+            </div>
+            <div class="icon" style="background-image:url('pics/typography/willsmith.jpg')" v-on:click="viewTypoPoster(4)">   
+            </div>
+            </div>
+        </div>
+
+        <div class='toprow whitebox bigbox'>
+            <p class='boxtitle'>Movie Posters</p>
+            <div class="icons">
+            <div class="icon" style="background-image:url('pics/movie/jumper.jpg')" v-on:click="viewMoviePoster(1)">   
+            </div>
+            <div class="icon" style="background-image:url('pics/movie/seven.jpg')" v-on:click="viewMoviePoster(2)">   
+            </div>
+            <div class="icon" style="background-image:url('pics/movie/seven2.jpg')" v-on:click="viewMoviePoster(3)">   
+            </div>
+            </div>
+        </div>
+
+        <div class='toprow whitebox bigbox'>
+            <p class='boxtitle'>Book Covers</p>
+            <div class="icons">
+            <div class="icon" style="background-image:url('pics/books/jamesbond.png');background-size: 150%" v-on:click="viewBook(1)">   
+            </div>
+            <div class="icon" style="background-image:url('pics/books/iamlegend.png');background-size: 150%" v-on:click="viewBook(2)">   
+            </div>
+            <div class="icon" style="background-image:url('pics/books/ceremony.png');background-size: 150%" v-on:click="viewBook(3)">   
+            </div>
+            </div>
+        </div>
+                
+        <div class='toprow whitebox bigbox'>
+            <p class='boxtitle'>Miscellaneous</p>
+            <div class="icons">
+            <div class="icon" style="background-image:url('pics/misc/burgerking.jpg')" v-on:click="viewMisc(1)">   
+            </div>
+            <div class="icon" style="background-image:url('pics/misc/dollars.jpg')" v-on:click="viewMisc(2)">   
+            </div>
+            <div class="icon" style="background-image:url('pics/misc/goodandevil.jpg')" v-on:click="viewMisc(3)">   
+            </div>
+            <div class="icon" style="background-image:url('pics/misc/jewelcases.png')" v-on:click="viewMisc(4)">   
+            </div>
+            <div class="icon" style="background-image:url('pics/misc/zombie101.jpg')" v-on:click="viewMisc(5)">   
+            </div>
+            <div class="icon" style="background-image:url('pics/misc/knockout.jpg')" v-on:click="viewVideo(6)">   
+            </div>
+            <div class="icon" style="background-image:url('pics/misc/gamergoalthumb.jpg')" v-on:click="viewMisc(6)">   
+            </div>
+            </div>
+        </div>
+
+        <div class='toprow whitebox bigbox'>
+            <p class='boxtitle'>Videos</p>
+            <div class="icons">
+            <div class="icon" style="background-image:url('pics/videos/android.jpg')" v-on:click="viewVideo(1)">   
+            </div>
+            <div class="icon" style="background-image:url('pics/videos/vice.jpg')" v-on:click="viewVideo(2)"> 
+            </div>
+            <a href="https://www.youtube.com/watch?v=ABtQ6Vu6xkE" target="_blank"><div class="icon" style="background-image:url('pics/videos/ufo.jpg')">  
+            </div></a> 
+            <div class="icon" style="background-image:url('pics/videos/paintings.jpg')" v-on:click="viewVideo(3)">   
+            </div>
+            <div class="icon" style="background-image:url('pics/videos/actors.jpg')" v-on:click="viewVideo(4)">   
+            </div>
+            <div class="icon" style="background-image:url('pics/videos/tech.jpg')" v-on:click="viewVideo(5)">   
+            </div>
+            </div>
+        </div>
+
+        </div>
+
+</div>
+
 
 <div class='box'>
 <h3 style='color:#3C8C40'>Qualifications</h3>
 <div class='smallboxes'>
-<div class='thirdrow smallbox'>
+<div class='thirdrow whitebox smallbox' v-if="webDev">
 <p class='boxtitle'>Software Development</p>
 <p class='boxdesc'>Bachelors with Upper Second Class Honours (2020).</p>
 <div class='langs'>
@@ -125,11 +286,11 @@
 
 </div>
                 
-<div class='thirdrow smallbox'>
+<div class='thirdrow whitebox smallbox' v-if="graphicDesign">
 <p class='boxtitle'>Graphic Design</p>
 <p class='boxdesc'>HND with Distinction (2016).</p>
 <div class='langs'>
-<p class='html'>HTML</p><p class='css'>CSS</p>
+<p class='html'>Photoshop</p><p class='css'>Illustrator</p><p class='php'>Vegas Pro</p><p class='sql'>PowerPoint</p>
 </div>
 
 </div>
@@ -140,16 +301,16 @@
 <h3 style='color:#4C636F;'>Employment History</h3>
 <div class='smallboxes'>
 
-<div class='fourthrow smallbox'>
+<div class='fourthrow whitebox smallbox' v-if="webDev">
 <p class='boxtitle'>Gray Dawes</p>
-<p class='boxdesc'>Application Developer<br>(August 2023 - July 2024)</p>
+<p class='boxdesc'>Application Developer<br>(August 2023 - January 2025)</p>
 <div class='langs'>
 <p class='csharp'>C#</p><p class='php'>Laravel</p><p class='html'>HTML</p><p class='css'>CSS</p><p class='javascript'>JavaScript</p><p class='javascript'>Angular</p>
 </div>
 <div class='bottom'><a href='https://www.gdg.travel/' target='_blank'>VIEW</a></div>
 </div>
 
-<div class='fourthrow smallbox'>
+<div class='fourthrow whitebox smallbox' v-if="webDev">
 <p class='boxtitle'>Global Resale</p>
 <p class='boxdesc'>Laravel Developer<br>(March 2022 - July 2023)</p>
 <div class='langs'>
@@ -158,7 +319,7 @@
 <div class='bottom'><a href='https://globalresale.com/' target='_blank'>VIEW</a></div>
 </div>
 
-<div class='fourthrow smallbox'>
+<div class='fourthrow whitebox smallbox' v-if="webDev">
 <p class='boxtitle'>International Workplace</p>
 <p class='boxdesc'>Front End Web Developer<br>(Sept 2020 - Sept 2021)</p>
 <div class='langs'>
@@ -167,12 +328,34 @@
 
 <div class='bottom'><a href='https://www.internationalworkplace.com' target='_blank'>VIEW</a></div>
 </div>
+
+<div class='fourthrow whitebox smallbox' v-if="graphicDesign">
+<p class='boxtitle'>Autumn Breeze Productions</p>
+<p class='boxdesc'>Social Media Manager<br>(Sept 2016 - Apr 2017)</p>
+<div class='langs'>
+<p class='html'>Photoshop</p><p class='php'>Vegas Pro</p><p class='sql'>PowerPoint</p>
 </div>
+</div>
+
+<div class='fourthrow whitebox smallbox' v-if="graphicDesign"> 
+<p class='boxtitle'>Amnick Social Enterprise</p>
+<p class='boxdesc'>Graphic Designer<br>(Jan 2016 - April 2016)</p>
+<div class='langs'>
+<p class='html'>Photoshop</p>
 </div>
 
 </div>
 
 
 </div>
+</div>
+
+</div>
+</div>
+
+
+</div>
+
+<script type="text/javascript" src="script.js"></script>
 
 </body>

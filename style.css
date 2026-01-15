@@ -15,6 +15,67 @@
     height: fit-content;
 }
 
+#modalBg{
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  top: 0;
+  left: 0;
+  position: fixed;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#close {
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  font-size: 20px;
+  cursor:pointer;
+}
+
+#caption {
+    font-size:14px;
+    max-width:460px;
+    min-height:10px;
+}
+
+#switches div {
+  height: 100%;
+  border-radius: 30px;
+  margin:0;
+  padding-left: 15px;
+  padding-right: 15px;
+  cursor:pointer;
+}
+
+.selectedSwitch {
+    color: #F6CE11;
+    background-color: black;
+}
+
+.deSelectedSwitch {
+    color: black;
+    background-color: #F6CE11;
+}
+
+#switches div p {
+    margin-top: 8px;
+}
+
+#switches {
+    height: 35px;
+    width: max-content;
+    border: 1px solid black;
+    border-radius: 30px;
+    margin-top:15px;
+    display:flex;
+    justify-content:space-between;
+    padding:3px;
+}
+
 #mainsection {
     width:100%;
     display: flex;
@@ -29,8 +90,13 @@ body {
   margin:0;
 }
 #mainarea {
+    display: flex;
+    justify-content: center;
+}
+
+#mainarea2 {
     width:70%;
-    display:flex;
+    display: flex;
 }
 
 .box {
@@ -68,16 +134,43 @@ p {
     font-family:arial;
 }
 
-.smallbox {
+.whitebox {
     margin-right:10px;
-    width:200px;
-    height:130px;
     background-color:white;
     border-radius: 4px;
     position: relative;
     padding:10px;
     box-shadow: 0 0 4px rgb(0 0 0 / 30%);
     margin-bottom:10px;
+}
+
+.smallbox {
+    width:200px;
+    height:130px;
+}
+
+.bigbox {
+    width:315px;
+    height:150px
+}
+
+.icons {
+    display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top:7px;
+  padding-left:5px;
+}
+
+.icon {
+    width:50px;
+    height:50px;
+    border:1px solid black;
+    border-radius:7px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    cursor:pointer;
 }
 
 .boxtitle {
@@ -187,21 +280,30 @@ a:hover {
     background-color:red;
 }
 
+@media (max-width: 1536px) {
+
+    .bigbox {
+        width:240px;
+    }
+}
+
 @media (max-width: 780px) {
 
 body {
     justify-content: flex-start;
 }
-
+.bigbox {
+    width:274px;
+}
 .box {
     height:unset;
 }
-
 .smallboxes {
     flex-wrap:wrap;
 }
 .smallbox {
     height: 130px;
+    width:274px;
     margin-bottom: 10px;
 }
 #sidebar p {
@@ -209,7 +311,12 @@ body {
     font-size: 15px;
 }
 #sidebar {
-    width:unset;
-    min-width:50%;
+    min-width:35% !important;
+}
+#mainarea2 {
+    width:100%;
+}
+#close {
+    font-size:30px;
 }
 }
