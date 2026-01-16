@@ -123,8 +123,11 @@ var application = new Vue({
     },
 
     created: function(){
-        const that = this;
-        //that.checkUrl();
+      const url = new URL(window.location.href);
+      if (url.searchParams.has('graphic_design')) {
+          this.graphicDesign = true;
+          this.webDev = false;
+      }
     }
 
 });
